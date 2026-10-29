@@ -1,0 +1,14 @@
+name: Data Schema Code Convention
+on:
+  push:
+    branches: main
+jobs:
+  DataSchemaCodeConvention:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout Code in Repository
+        uses: actions/checkout@v4
+      - name: Install SQL Linter
+        run: pip install sqlfluff
+      - name: Start SQL Linter
+        run: sqlfluff lint $GITHUB_WORKSPACE/DataSchema.sql --dialect mysql
