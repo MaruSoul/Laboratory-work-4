@@ -27,5 +27,7 @@ jobs:
     runs-on: ubuntu-24.04
     needs: [PrintSoftwareVersions]
     steps:
+      - name: Install MySQL 9.7 LTS
+        run: docker pull --quiet mysql:9.7
       - name: Print MySQL Version
         run: docker run --rm mysql:9.7 mysqld --version
