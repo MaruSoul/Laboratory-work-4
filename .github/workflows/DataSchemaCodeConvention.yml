@@ -11,4 +11,4 @@ jobs:
       - name: Install SQL Linter
         run: pip install sqlfluff
       - name: Start SQL Linter
-        run: sqlfluff lint $GITHUB_WORKSPACE/DataSchema.sql --dialect mysql
+        run: sqlfluff lint $GITHUB_WORKSPACE/DataSchemaModified.sql --dialect mysql
