@@ -1,0 +1,31 @@
+name: Print Software Versions
+on:
+  push:
+    branches: main
+jobs:
+  PrintSoftwareVersions:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Print OS Version
+        run: lsb_release -a
+      - name: Print Nginx Version
+        run: nginx -v
+      - name: Install PHP 8.5
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.5"
+          tools: composer
+      - name: Print PHP Version
+        run: php --version
+      - name: Print Composer Version
+        run: composer --version
+      - name: Install Laravel 13
+        run: composer create-project "laravel/laravel:^13.0" idiomlens --prefer-dist --no-interaction
+      - name: Print Laravel Version
+        run: php idiomlens/artisan --version
+  PrintDBMSVersions:
+    runs-on: ubuntu-24.04
+    needs: [PrintSoftwareVersions]
+    steps:
+      - name: Print MySQL Version
+        run: docker run --rm mysql:9.7 mysqld --version
