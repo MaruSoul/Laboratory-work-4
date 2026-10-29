@@ -1,0 +1,24 @@
+# https://github.com/marketplace/actions/super-linter
+name: Program Code Convention
+on:
+  push:
+    branches: main
+permissions:
+  contents: read
+  statuses: write
+jobs:
+  ProgramCodeConvention:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout Code in Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Lint Program Code
+        uses: super-linter/super-linter/slim@v7
+        env:
+          VALIDATE_ALL_CODEBASE: true
+          VALIDATE_PHP_PHPCS: true
+          FILTER_REGEX_INCLUDE: .*ProgramCode\.php
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
